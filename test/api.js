@@ -1,5 +1,6 @@
 import test from 'ava'
 let config = require('../lib')
+let mongodb = require('mongodb')
 
 let count = 0
 let getOptions = () => {
@@ -14,6 +15,16 @@ let getOptions = () => {
     default: {}
   }
 }
+
+test.before('cleanup', t => {
+  let options = getOptions()
+  let db = mongodb.MongoClient.connect(options.mongo.url)
+  return db.then((conn) => {
+    return conn.collection(options.mongo.collection)
+  }).then((coll) => {
+    return coll.drop()
+  })
+})
 
 test('throws if not argument is provided', t => {
   t.throws(() => {
