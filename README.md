@@ -40,7 +40,7 @@ exports.config = DBMConfig(config)
 ```
 where-i-need-to-use.js
 ``` javascript
-const config = require('./init-dbm-config').config
+const config = require('./init-dbm-config')
 // ... inside a function or callback
   config.get('foo') // returns a Promise that resolves to 'bar', can be rejected on error.
   config.set('ayy', 'lmao') // returns a Promise that can be rejected on error.
