@@ -41,11 +41,11 @@ const options = {
     }
   }
 }
-DBMConfig('myConfigName', config)
+exports.config = DBMConfig(config)
 ```
 where-i-need-to-use.js
 ``` javascript
-const config = require('dbmconfig')('myConfigName')
+const config = require('./init-dbm-config').config
 // ... inside a function or callback
   config.get('foo') // returns a Promise that resolves to 'bar', can be rejected on error.
   config.set('ayy', 'lmao') // returns a Promise that can be rejected on error.
@@ -62,14 +62,10 @@ const config = require('dbmconfig')('myConfigName')
 
 
 ### API
-__DBMConfigInstance__ DBMConfig(___namespace___, ___options___)
+__DBMConfigInstance__ DBMConfig(___options___)
 Store the options in the given namespace and returns a instance. Overrides the namespace.
 - _Object_ namespace
 - _Object_ options
-
-__DBMConfigInstance__ DBMConfig(___namespace___)
-Gets the reference to the previous DBMConfigInstance created and configured.
-- _String_ namespace: Nombre del namespace.
 
 __Promise(JSON | String | Number | Boolean)__ DBMConfigInstance.get(___key___, [___default___])
 Get the value of the given key. Supports nested config like `foo.bar` for something like `{ foo: { bar: 'value' } }`. returns a Promise that resolves the value. If default is not defined and the value is not available the Promise is rejected.

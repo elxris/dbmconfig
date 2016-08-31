@@ -1,5 +1,5 @@
 import test from 'ava'
-import config from '../index'
+let config = require('../lib')
 
 let count = 0
 let getOptions = () => {
@@ -15,46 +15,20 @@ let getOptions = () => {
   }
 }
 
-test('dbmconfig is a function', t => {
-  t.is(typeof config, 'function')
-})
-
 test('throws if not argument is provided', t => {
   t.throws(() => {
     config()
   })
 })
 
-test('throws if name is undefined', t => {
-  t.throws(() => {
-    config(undefined, getOptions())
-  })
-})
-
-test('throws if name argument is not a string', t => {
-  t.throws(() => {
-    config(1, getOptions())
-  })
-})
-
 test('throws if options are not an object', t => {
   t.throws(() => {
-    config('myConfig', () => {
-    })
+    config(() => {})
   })
 })
 
-test('dbmconfig returns a dbmconfiguration if only a config argument is provided', t => {
+test('DBMConfig returns a DBMConfig instance', t => {
   t.true(config(getOptions()) instanceof config)
-})
-
-test('DBMConfig returns a DBMConfiguration function', t => {
-  t.true(config('instance', getOptions()) instanceof config)
-})
-
-test('DBMConfig without a configuration on created instancename returns previous instance', t => {
-  let instance = config('foo', getOptions())
-  t.is(config('foo'), instance)
 })
 
 test('get() without any default on non existent value should return a rejected promise', t => {
