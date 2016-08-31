@@ -65,3 +65,8 @@ __Promise__ DBMConfigInstance.set(___key___, ___value___)
 Set in a JSON Object the value in the given key. If a null is given at value, the key will be removed of the config. If there was a default, the default is not erased.
 - _String_ key: The key of the stored value.
 - _JSON | String | Number | Boolean | Null_ value: The value to be set. If null, erases it.
+
+### Run the tests
+
+All you have to do is download the project and install all the dependencies
+launch a local instance of MongoDB and type `npm test` on your terminal.
