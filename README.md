@@ -24,7 +24,7 @@ init-dbm-config.js
 const DBMConfig = require('dbmconfig')
 const options = {
   mongo: {
-    url: 'mongo://localhost/config',
+    url: 'mongodb://localhost/config',
     collection: 'config',
     filter: {
       _id: 'my-config'

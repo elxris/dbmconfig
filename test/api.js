@@ -5,7 +5,7 @@ let count = 0
 let getOptions = () => {
   return {
     mongo: {
-      url: 'mongo://localhost/config',
+      url: 'mongodb://localhost/config',
       collection: 'config',
       filter: {
         _id: `my-config-${++count}`
