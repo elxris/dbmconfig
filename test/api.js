@@ -7,7 +7,7 @@ let getOptions = () => {
     mongo: {
       url: 'mongo://localhost/config',
       collection: 'config',
-      query: {
+      filter: {
         _id: `my-config-${++count}`
       }
     },
