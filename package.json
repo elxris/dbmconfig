@@ -1,6 +1,6 @@
 {
   "name": "dbmconfig",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "DB Managed Configuration Manager",
   "repository": "elxris/dbmconfig",
   "main": "lib/index.js",
