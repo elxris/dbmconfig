@@ -1,12 +1,13 @@
 {
   "name": "dbmconfig",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "DB Managed Configuration Manager",
+  "repository": "elxris/dbmconfig",
+  "main": "lib/index.js",
   "scripts": {
     "test": "ava"
   },
-  "author": "",
+  "author": "Christian Ceciliano (elxris)",
   "license": "MIT",
   "devDependencies": {
     "ava": "^0.16.0"
