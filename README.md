@@ -54,7 +54,6 @@ const config = require('./init-dbm-config').config
 ### API
 __DBMConfigInstance__ DBMConfig(___options___)
 Store the options in the given namespace and returns a instance. Overrides the namespace.
-- _Object_ namespace
 - _Object_ options
 
 __Promise(JSON | String | Number | Boolean)__ DBMConfigInstance.get(___key___, [___default___])
