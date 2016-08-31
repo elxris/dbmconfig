@@ -1,6 +1,5 @@
 DataBase Managed Configuration
 =============================
-# Spec.
 ## Problema
 Las aplicaciones necesitan variables permanentes y compartidas a lo largo de las
 instancias de la aplicación.
