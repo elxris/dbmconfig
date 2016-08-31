@@ -10,11 +10,13 @@ Necesitan ser accesibles y modificables.
 Si se usa con frecuencia o en alguna operación crítica en velocidad se debe
 considerar que por velocidad no se podría consutar cada vez o si se hace podría
 ser la base de datos un cuello de botella.
+Otra limitante es la base de datos que se elija. Por defecto es mongodb y la
+limitante que tiene esto es que cada documento (configuración) sólo puede tener
+16MB de datos.
 
 ## Hipótesis
 Una librería con una sencilla api podría cubrir nuestras necesidades, porque:
-- Una función puede devolver un valor, este valor puede estar cacheado e
-internamente poder jalar ese valor cada cierto tiempo, con backoffs.
+- Una función puede devolver un valor.
 - Podría pasarse la configuración de la base de datos, por lo que podría ser una
 solución multibase de datos, con una capa de compatibilidad.
 
@@ -33,12 +35,6 @@ const options = {
   default: {
     foo: 'bar',
     foobar: { foo: 'barfoo' }
-  },
-  cached: {
-    enabled: true,
-    update: {
-      time: '300s'
-    }
   }
 }
 exports.config = DBMConfig(config)
@@ -49,14 +45,9 @@ const config = require('./init-dbm-config').config
 // ... inside a function or callback
   config.get('foo') // returns a Promise that resolves to 'bar', can be rejected on error.
   config.set('ayy', 'lmao') // returns a Promise that can be rejected on error.
-  config.cached('ayy') // returns 'lmao'
-  config.cached('foobar.foo') // returns 'barfoo' because the defaults.
 
   config.get('emptyVariable') // returns a Promise that will fail.
   config.get('emptyVariable', 'default') // returns a Promise that resolves to 'default'
-
-  config.cached('emptyVariable') // return NULL
-  config.cached('emptyVariable', 'default') // return 'default'.
 //
 ```
 
@@ -72,12 +63,7 @@ Get the value of the given key. Supports nested config like `foo.bar` for someth
 - _String_ key: The key of the stored value.
 - _String_ default: If the value is not available, then resolves to the default.
 
-__JSON | String | Number | Boolean | Null__ DBMConfigInstance.cached(___key___, [___default___])
-Get the value of the given key. Supports nested config like `foo.bar` for something like `{ foo: { bar: 'value'}}`. If default is not defined and the values is not available then this returns _null_. The cached system checks if exist in the cache, if not: check the default argument, if not: check in the instance options defaults.
-- _String_ key: The key of the stored value.
-- _String_ default: If the value is not available, then resolves to the defaut.
-
 __Promise__ DBMConfigInstance.set(___key___, ___value___)
 Set in a JSON Object the value in the given key. If a null is given at value, the key will be removed of the config. If there was a default, the default is not erased.
 - _String_ key: The key of the stored value.
-- _JSON | String | Number | Boolean | Null_
+- _JSON | String | Number | Boolean | Null_ value: The value to be set. If null, erases it.
